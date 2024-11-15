@@ -1,17 +1,18 @@
-<h1>"Your list here"</h1>
+<h1><%="See your #{@list.name} list here!"%></h1>
 
-<ul>
+<div class="cards">
   <% @list.movies.each do |movie| %>
-    <li><%= movie.title %></li>
+    <div class="cards">
+      <%= "#{movie.title} - " %>
+      <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+      <%= link_to "[X]", bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+    </div>
   <% end %>
-</ul>
-
+</div>
 
 <h2>Add a movie to a list</h2>
-
 <%= simple_form_for [@list, @bookmark] do |f| %>
   <%= f.association :movie %>
   <%= f.input :comment %>
   <%= f.submit %>
 <% end %>
-

@@ -1,9 +1,9 @@
-<h1>ALl your lists here</h1>
+<h1>All your lists here</h1>
 
-<ul>
+<div class="cards">
   <% @lists.each do |list| %>
-    <li><%= link_to list.name, list_path(list) %></li>
+    <div class="card-category"> <%= link_to list.name, list_path(list)%></div>
   <% end %>
-</ul>
+</div>
 
-<%= link_to "Create a new list", new_list_path(@list) %>
+<div class="btn btn-dark"><%= link_to "Create a new list", new_list_path(@list) %></div>
